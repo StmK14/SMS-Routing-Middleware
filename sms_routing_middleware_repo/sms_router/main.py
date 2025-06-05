@@ -1,21 +1,20 @@
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
-import requests
-import os
+from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
 app = FastAPI()
-# Ruta raíz
+
 @app.get("/")
 async def read_root():
-    return {"message": "API funcionando correctamente"}
-    
-# Para servir archivos estáticos como favicon.ico
-app.mount("/static", StaticFiles(directory="static"), name="static")
+    return {"message": "¡API funcionando correctamente!"}
 
-# Ruta directa al favicon
+# 👉 Montar archivos estáticos (favicon y otros posibles)
+app.mount("/static", StaticFiles(directory="sms_router/static"), name="static")
+
+# 👉 Ruta directa para el favicon
 @app.get("/favicon.ico")
 async def favicon():
-    return FileResponse("static/favicon.ico")
+    return FileResponse("sms_router/static/favicon.ico")
 
 class SMSRequest(BaseModel):
     to: str
