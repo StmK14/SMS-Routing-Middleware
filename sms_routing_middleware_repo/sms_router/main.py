@@ -8,9 +8,14 @@ app = FastAPI()
 @app.get("/")
 async def read_root():
     return {"message": "API funcionando correctamente"}
-
+    
 # Para servir archivos estáticos como favicon.ico
 app.mount("/static", StaticFiles(directory="static"), name="static")
+
+# Ruta directa al favicon
+@app.get("/favicon.ico")
+async def favicon():
+    return FileResponse("static/favicon.ico")
 
 class SMSRequest(BaseModel):
     to: str
