@@ -4,6 +4,13 @@ import requests
 import os
 
 app = FastAPI()
+# Ruta raíz
+@app.get("/")
+async def read_root():
+    return {"message": "API funcionando correctamente"}
+
+# Para servir archivos estáticos como favicon.ico
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 class SMSRequest(BaseModel):
     to: str
