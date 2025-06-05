@@ -8,10 +8,10 @@ app = FastAPI()
 async def read_root():
     return {"message": "¡API funcionando correctamente!"}
 
-# 👉 Montar archivos estáticos (favicon y otros posibles)
+#Montar archivos estáticos (favicon y otros posibles)
 app.mount("/static", StaticFiles(directory="sms_router/static"), name="static")
 
-# 👉 Ruta directa para el favicon
+#Ruta directa para el favicon
 @app.get("/favicon.ico")
 async def favicon():
     return FileResponse("sms_router/static/favicon.ico")
